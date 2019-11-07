@@ -2,6 +2,11 @@ package robot.hardware.chassis;
 
 public interface Chassis {
 	
+	public default void drive(double speed) {
+		if (speed < 0) this.forwardDrive(speed);
+		else this.backwardDrive(-speed);
+	}
+	
 	public void forwardDrive(double speed);
 	
 	public void backwardDrive(double speed);
