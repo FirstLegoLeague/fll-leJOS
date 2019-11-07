@@ -64,6 +64,11 @@ public abstract class RobotMotor {
 		this.brake(false);
 	}
 	
+	public void drive(double speed) {
+		if (speed < 0) this.forward(speed);
+		else this.backward(-speed);
+	}
+	
 	protected abstract int convertSpeed(double speed);
 	
 	public abstract void forward(double speed);
