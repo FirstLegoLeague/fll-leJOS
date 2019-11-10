@@ -84,21 +84,4 @@ public class MediumMotor extends RobotMotor {
 		else this.coast();
 	}
 
-	@Override
-	public void rotateSeconds(double speed, double seconds, boolean brake) {
-		m.resetTachoCount();
-		long startTime = System.currentTimeMillis();
-
-		if (speed >= 0)
-			this.forward(speed);
-		else
-			this.backward(speed);
-
-		while (System.currentTimeMillis() - startTime < seconds * 1000 && RunHandler.isRunning())
-			;
-
-		if (brake) this.brake();
-		else this.coast();
-	}
-
 }

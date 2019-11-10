@@ -4,6 +4,7 @@ import lejos.hardware.port.MotorPort;
 import lejos.hardware.port.Port;
 import robot.RobotMap;
 import robot.exceptions.HardwareCreationError;
+import robot.runs.RunHandler;
 import robot.utils.Wait;
 
 public abstract class RobotMotor {
@@ -91,6 +92,21 @@ public abstract class RobotMotor {
 		else this.coast();
 	}
 	
+	public void rotateSeconds(double speed, double seconds, boolean brake) {
+		long startTime = System.currentTimeMillis();
+
+		if (speed >= 0)
+			this.forward(speed);
+		else
+			this.backward(speed);
+
+		while (System.currentTimeMillis() - startTime < seconds * 1000 && RunHandler.isRunning())
+			;
+
+		if (brake) this.brake();
+		else this.coast();
+	}
+	
 	protected abstract int convertSpeed(double speed);
 	
 	public abstract void forward(double speed);
@@ -109,6 +125,4 @@ public abstract class RobotMotor {
 	
 	public abstract void rotateDegrees(double speed, int degrees, boolean brake);
 	
-	public abstract void rotateSeconds(double speed, double seconds, boolean brake);
-
 }
