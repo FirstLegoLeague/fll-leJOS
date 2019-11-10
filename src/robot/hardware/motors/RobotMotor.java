@@ -15,9 +15,7 @@ public abstract class RobotMotor {
 	
 	private char portName;
 	protected Port port;
-	
-	protected int zeroValue;
-	
+
 	public RobotMotor(String motorName, MotorType motorType, char portName) {
 		this(motorName, motorType, portName, false);
 	}
@@ -68,13 +66,6 @@ public abstract class RobotMotor {
 		this.brake(false);
 	}
 	
-	public void resetEncoderToCurrentValue() {
-		this.zeroValue += this.readEncoder();
-	}
-	
-	public void resetEncoderToAbsoluteValue() {
-		this.zeroValue = 0;
-	}
 	
 	public void drive(double speed) {
 		if (speed > 0) this.forward(speed);

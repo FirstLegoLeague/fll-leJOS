@@ -44,7 +44,7 @@ public class LargeMotor extends RobotMotor {
 	@Override
 	public int readEncoder() {
 		if (!this.inverted) return l.getTachoCount();
-		else return -l.getTachoCount();
+		else return (-l.getTachoCount());
 	}
 
 	@Override
