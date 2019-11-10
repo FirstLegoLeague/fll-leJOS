@@ -62,7 +62,7 @@ FLL-leJOS was created with FLL teamns in mind and aims to provide an intuitive a
 3. Follow the [instructions on the leJOS wiki](https://sourceforge.net/p/lejos/wiki/Installing%20the%20Eclipse%20plugin/) to install the leJOS eclipse plugin
 ### Connecting the EV3 to you PC
 
- #### Via bluetooth
+ #### Via Bluetooth
  1. Setup your brick name and IP to something unique instead of the default `EV3` and `10.0.1.1`. This is done via the brick's on-screen menu:
     - Select `system` and `Change name` to set the brick name
     - Select `PAN`, `Access pt`, `Address`, `Advanced`, set your desired IP, and press the `back` button until you return to the main menu. The brick will take a few seconds to set your IP after you exit! 
