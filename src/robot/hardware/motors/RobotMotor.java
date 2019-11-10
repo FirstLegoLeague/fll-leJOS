@@ -68,11 +68,11 @@ public abstract class RobotMotor {
 		this.brake(false);
 	}
 	
-	public void resetToCurrentValue() {
+	public void resetEncoderToCurrentValue() {
 		this.zeroValue += this.readEncoder();
 	}
 	
-	public void resetToAbsoluteValue() {
+	public void resetEncoderToAbsoluteValue() {
 		this.zeroValue = 0;
 	}
 	
