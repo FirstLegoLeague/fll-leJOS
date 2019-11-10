@@ -1,7 +1,6 @@
 package robot.hardware.motors;
 
 import lejos.hardware.motor.EV3MediumRegulatedMotor;
-import robot.runs.RunHandler;
 import robot.utils.Wait;
 
 public class MediumMotor extends RobotMotor {
