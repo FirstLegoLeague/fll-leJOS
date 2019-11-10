@@ -70,6 +70,27 @@ public abstract class RobotMotor {
 		else this.backward(-speed);
 	}
 	
+	public void rotateToZero(double speed, boolean brake) {
+		this.rotateToValue(speed, 0, brake);
+	}
+	
+	public void rotateToValue(double speed, int value, boolean brake) {
+		if (this.readEncoder() < value) {
+			this.forward(speed);
+			Wait.waitFor(() -> {
+				return this.readEncoder() >= value;
+			});
+		} else {
+			this.backward(speed);
+			Wait.waitFor(() -> {
+				return this.readEncoder() <= value;
+			});
+		}
+		
+		if (brake) this.brake();
+		else this.coast();
+	}
+	
 	protected abstract int convertSpeed(double speed);
 	
 	public abstract void forward(double speed);
@@ -90,20 +111,4 @@ public abstract class RobotMotor {
 	
 	public abstract void rotateSeconds(double speed, double seconds, boolean brake);
 
-	public void rotateToValue(double speed, int value, boolean brake) {
-		if (this.readEncoder() < value) {
-			this.forward(speed);
-			Wait.waitFor(() -> {
-				return this.readEncoder() >= value;
-			});
-		} else {
-			this.backward(speed);
-			Wait.waitFor(() -> {
-				return this.readEncoder() <= value;
-			});
-		}
-		
-		if (brake) this.brake();
-		else this.coast();
-	}
 }
