@@ -2,7 +2,6 @@ package robot.hardware.motors;
 
 import lejos.hardware.motor.EV3LargeRegulatedMotor;
 import lejos.robotics.RegulatedMotor;
-import robot.utils.Wait;
 
 public class LargeMotor extends RobotMotor {
 
@@ -60,27 +59,6 @@ public class LargeMotor extends RobotMotor {
 	@Override
 	public float getMaxSpeed() {
 		return l.getMaxSpeed();
-	}
-
-	@Override
-	public void rotateDegrees(double speed, int degrees, boolean brake) {
-		if (degrees < 0) throw new IllegalArgumentException("Degrees must be positive!");
-		l.resetTachoCount();
-
-		if (speed >= 0) {
-			this.forward(speed);
-			Wait.waitFor(() -> {
-				return Math.abs(l.getTachoCount()) < degrees;
-			});
-		} else {
-			this.backward(speed);
-			Wait.waitFor(() -> {
-				return -Math.abs(l.getTachoCount()) > degrees;
-			});
-		}
-
-		if (brake) this.brake();
-		else this.coast();
 	}
 
 	public void startSync() {

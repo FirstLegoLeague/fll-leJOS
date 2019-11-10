@@ -98,6 +98,26 @@ public abstract class RobotMotor {
 		else this.coast();
 	}
 	
+	public void rotateDegrees(double speed, int degrees, boolean brake) {
+		if (degrees < 0) throw new IllegalArgumentException("Degrees must be positive!");
+		int startValue = this.readEncoder();
+
+		if (speed >= 0) {
+			this.forward(speed);
+			Wait.waitFor(() -> {
+				return this.readEncoder() > startValue + degrees;
+			});
+		} else {
+			this.backward(speed);
+			Wait.waitFor(() -> {
+				return this.readEncoder() < startValue - degrees;
+			});
+		}
+
+		if (brake) this.brake();
+		else this.coast();
+	}
+	
 	public void rotateSeconds(double speed, double seconds, boolean brake) {
 		long startTime = System.currentTimeMillis();
 
@@ -129,7 +149,5 @@ public abstract class RobotMotor {
 	public abstract boolean isStalled();
 	
 	public abstract float getMaxSpeed();
-	
-	public abstract void rotateDegrees(double speed, int degrees, boolean brake);
 	
 }
