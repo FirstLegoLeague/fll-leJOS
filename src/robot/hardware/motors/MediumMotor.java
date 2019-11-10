@@ -43,7 +43,8 @@ public class MediumMotor extends RobotMotor {
 
 	@Override
 	public int readEncoder() {
-		return m.getTachoCount();
+		if (!this.inverted) return m.getTachoCount();
+		else return -m.getTachoCount();
 	}
 
 	@Override
@@ -99,5 +100,7 @@ public class MediumMotor extends RobotMotor {
 		if (brake) this.brake();
 		else this.coast();
 	}
+	
+
 
 }
