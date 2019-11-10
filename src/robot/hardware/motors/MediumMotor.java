@@ -100,7 +100,5 @@ public class MediumMotor extends RobotMotor {
 		if (brake) this.brake();
 		else this.coast();
 	}
-	
-
 
 }
