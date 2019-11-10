@@ -133,7 +133,6 @@ public abstract class RobotMotor {
 		else this.coast();
 	}
 	
-	
 	public abstract void forward(double speed);
 	
 	public abstract void backward(double speed);
