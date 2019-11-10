@@ -11,5 +11,10 @@ public class TouchSensor extends RobotSensor {
 		this.t = new EV3TouchSensor(this.port);
 		this.s = t.getTouchMode();
 	}
+	
+	@Override
+	public double read() {
+		return this.read(1);
+	}
 
 }
