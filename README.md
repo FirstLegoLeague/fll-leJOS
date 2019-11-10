@@ -80,14 +80,17 @@ FLL-leJOS was created with FLL teamns in mind and aims to provide an intuitive a
 
 ## Setting up FLL-leJOS inside Eclipse
 
-#### Using Git
+#### Stable Releases
+1. Go to the `releases` tab of this project
+2. Download the source code
+3. Inside Eclipse, right click inside the package manager and select `import`. Under the `General` folder, select the `Archive File` option, and complete the import process.
+4. Right click the project. Select `leJOS` -> `convert to leJOS EV3 project`
+
+For information about pushing your robot code and using Git from Eclipse in general, check out [this guide](https://eclipsesource.com/blogs/tutorials/egit-tutorial/).
+
+#### Clone the Repository (Not recommended!)
 1. Inside Eclipse, right click inside the package manager and select `import`. Under the `Git` folder, use the `Projects from git (with smart import)` option (If your eclipse is older, you will not have this option. In that case, download git for windows and use git bash, or update your Eclipse)
 2. Paste the repository URL inside the first field, and finish the import. Everything will updaate automatically.
 3. Right click the repository. Select `leJOS` -> `convert to leJOS EV3 project`
 
 For information about pushing your robot code to another repository, and using Git from Eclipse in general, check out [this guide](https://eclipsesource.com/blogs/tutorials/egit-tutorial/).
-
-#### Without Git
-1. Go to the `releases` tab of this project
-2. Download the source code
-3. Import the project through Eclipse
