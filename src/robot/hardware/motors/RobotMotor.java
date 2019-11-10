@@ -4,6 +4,7 @@ import lejos.hardware.port.MotorPort;
 import lejos.hardware.port.Port;
 import robot.RobotMap;
 import robot.exceptions.HardwareCreationError;
+import robot.utils.Wait;
 
 public abstract class RobotMotor {
 	
@@ -89,4 +90,20 @@ public abstract class RobotMotor {
 	
 	public abstract void rotateSeconds(double speed, double seconds, boolean brake);
 
+	public void rotateToValue(double speed, int value, boolean brake) {
+		if (this.readEncoder() < value) {
+			this.forward(speed);
+			Wait.waitFor(() -> {
+				return this.readEncoder() >= value;
+			});
+		} else {
+			this.backward(speed);
+			Wait.waitFor(() -> {
+				return this.readEncoder() <= value;
+			});
+		}
+		
+		if (brake) this.brake();
+		else this.coast();
+	}
 }
