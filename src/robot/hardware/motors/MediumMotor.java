@@ -56,11 +56,10 @@ public class MediumMotor extends RobotMotor {
 	public boolean isStalled() {
 		return m.isStalled();
 	}
-
+	
 	@Override
-	protected int convertSpeed(double speed) {
-		if (speed > 1.0 || speed < -1.0) throw new IllegalArgumentException("Speed must be between 1 and -1!");
-		return (int) Math.min(Math.max((Math.abs(speed) * m.getMaxSpeed()), 0), m.getMaxSpeed());
+	public float getMaxSpeed() {
+		return m.getMaxSpeed();
 	}
 
 	@Override

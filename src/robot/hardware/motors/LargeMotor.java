@@ -59,9 +59,8 @@ public class LargeMotor extends RobotMotor {
 	}
 
 	@Override
-	protected int convertSpeed(double speed) {
-		if (speed > 1.0 || speed < -1.0) throw new IllegalArgumentException("Speed must be between 1 and -1!");
-		return (int) Math.min(Math.max((Math.abs(speed) * l.getMaxSpeed()), 0), l.getMaxSpeed());
+	public float getMaxSpeed() {
+		return l.getMaxSpeed();
 	}
 
 	@Override
