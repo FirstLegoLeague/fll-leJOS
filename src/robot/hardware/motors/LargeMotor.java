@@ -67,6 +67,11 @@ public class LargeMotor extends RobotMotor {
 	public float getMaxSpeed() {
 		return l.getMaxSpeed();
 	}
+	
+	@Override
+	public boolean shouldBeMoving() {
+		return l.isMoving();
+	}
 
 	public void startSync() {
 		l.startSynchronization();

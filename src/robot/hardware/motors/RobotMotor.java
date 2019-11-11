@@ -169,6 +169,8 @@ public abstract class RobotMotor {
 	
 	public abstract void setStallThreshold(int error, int time);
 	
+	public abstract boolean shouldBeMoving();
+	
 	public abstract void coast();
 	
 	public abstract int readEncoder();

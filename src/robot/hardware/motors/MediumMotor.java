@@ -66,5 +66,10 @@ public class MediumMotor extends RobotMotor {
 	public float getMaxSpeed() {
 		return m.getMaxSpeed();
 	}
+	
+	@Override
+	public boolean shouldBeMoving() {
+		return m.isMoving();
+	}
 
 }
