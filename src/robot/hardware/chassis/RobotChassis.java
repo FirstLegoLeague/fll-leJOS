@@ -45,12 +45,12 @@ public class RobotChassis implements Chassis{
 	@Override
 	public void forwardDrive(double speed, int degrees, boolean brake) {
 		if (degrees < 0) throw new IllegalArgumentException("Degrees must be positive!");
-		leftMotor.resetEncoder();
+		int startValue = leftMotor.readEncoder();
 		
 		syncDrive(speed, speed);
 		
 		Wait.waitFor(() -> {
-			return leftMotor.readEncoder() > degrees;
+			return leftMotor.readEncoder() > startValue + degrees;
 		});
 		
 		if (brake) this.brake();
@@ -60,12 +60,12 @@ public class RobotChassis implements Chassis{
 	@Override
 	public void backwardDrive(double speed, int degrees, boolean brake) {
 		if (degrees < 0) throw new IllegalArgumentException("Degrees must be positive!");
-		leftMotor.resetEncoder();
+		int startValue = leftMotor.readEncoder();
 		
 		syncDrive(-speed, -speed);
 		
 		Wait.waitFor(() -> {
-			return leftMotor.readEncoder() < -degrees;
+			return leftMotor.readEncoder() < startValue - degrees;
 		});
 		
 		if (brake) this.brake();
@@ -100,14 +100,14 @@ public class RobotChassis implements Chassis{
 	@Override
 	public void tankDrive(double leftSpeed, double rightSpeed, int degrees, boolean brake) {
 		if (degrees < 0) throw new IllegalArgumentException("Degrees must be positive!");
-		leftMotor.resetEncoder();
-		rightMotor.resetEncoder();
+		int leftStartValue = leftMotor.readEncoder();
+		int rightStartValue = rightMotor.readEncoder();
 		
 		syncDrive(leftSpeed, rightSpeed);
 		
 		Wait.waitFor(() -> {
-			return (Math.abs(leftMotor.readEncoder()) > degrees 
-					|| Math.abs(rightMotor.readEncoder()) > degrees);
+			return (Math.abs(leftMotor.readEncoder()) > Math.abs(leftStartValue) + degrees 
+					|| Math.abs(rightMotor.readEncoder()) > Math.abs(rightStartValue) + degrees);
 		});
 		
 		if (brake) this.brake();
