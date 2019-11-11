@@ -66,10 +66,18 @@ public abstract class RobotMotor {
 		this.brake(false);
 	}
 	
-	
 	public void drive(double speed) {
-		if (speed > 0) this.forward(speed);
-		else this.backward(-speed);
+		this.drive(speed, 1.0);
+	}
+	
+	public void drive(double speed, double acceleration) {
+		if (speed > 0) this.forward(speed, acceleration);
+		else this.backward(-speed, acceleration);
+	}
+	
+	protected int convertAcceleration(double acceleration) {
+		if (acceleration > 1.0 || acceleration < 0) throw new IllegalArgumentException("Acceleration must be between 0 and 1!");
+		return (int) acceleration * 6000;
 	}
 	
 	protected int convertSpeed(double speed) {
@@ -78,17 +86,21 @@ public abstract class RobotMotor {
 	}
 	
 	public void rotateToZero(double speed, boolean brake) {
-		this.rotateToValue(speed, 0, brake);
+		this.rotateToValue(speed, 1.0, 0, brake);
 	}
 	
-	public void rotateToValue(double speed, int value, boolean brake) {
+	public void rotateToZero(double speed, double acceleration, boolean brake) {
+		this.rotateToValue(speed, acceleration, 0, brake);
+	}
+	
+	public void rotateToValue(double speed, double acceleration, int value, boolean brake) {
 		if (this.readEncoder() < value) {
-			this.forward(speed);
+			this.forward(speed, acceleration);
 			Wait.waitFor(() -> {
 				return this.readEncoder() >= value;
 			});
 		} else {
-			this.backward(speed);
+			this.backward(speed, acceleration);
 			Wait.waitFor(() -> {
 				return this.readEncoder() <= value;
 			});
@@ -99,16 +111,20 @@ public abstract class RobotMotor {
 	}
 	
 	public void rotateDegrees(double speed, int degrees, boolean brake) {
+		this.rotateDegrees(speed, 1.0, degrees,  brake);
+	}
+	
+	public void rotateDegrees(double speed, double acceleration, int degrees, boolean brake) {
 		if (degrees < 0) throw new IllegalArgumentException("Degrees must be positive!");
 		int startValue = this.readEncoder();
 
 		if (speed >= 0) {
-			this.forward(speed);
+			this.forward(speed, acceleration);
 			Wait.waitFor(() -> {
 				return this.readEncoder() > startValue + degrees;
 			});
 		} else {
-			this.backward(speed);
+			this.backward(speed, acceleration);
 			Wait.waitFor(() -> {
 				return this.readEncoder() < startValue - degrees;
 			});
@@ -119,12 +135,16 @@ public abstract class RobotMotor {
 	}
 	
 	public void rotateSeconds(double speed, double seconds, boolean brake) {
+		this.rotateSeconds(speed, 1.0, seconds, brake);
+	}
+	
+	public void rotateSeconds(double speed, double acceleration, double seconds, boolean brake) {
 		long startTime = System.currentTimeMillis();
 
 		if (speed >= 0)
-			this.forward(speed);
+			this.forward(speed, acceleration);
 		else
-			this.backward(speed);
+			this.backward(speed, acceleration);
 
 		while (System.currentTimeMillis() - startTime < seconds * 1000 && RunHandler.isRunning())
 			;
@@ -133,11 +153,21 @@ public abstract class RobotMotor {
 		else this.coast();
 	}
 	
-	public abstract void forward(double speed);
+	public void forward(double speed) {
+		this.forward(speed, 1.0);
+	}
 	
-	public abstract void backward(double speed);
+	public void backward(double speed) {
+		this.backward(speed, 1.0);
+	}
+	
+	public abstract void forward(double speed, double acceleration);
+	
+	public abstract void backward(double speed, double acceleration);
 	
 	public abstract void brake(boolean immediateReturn);
+	
+	public abstract void setStallThreshold(int error, int time);
 	
 	public abstract void coast();
 	

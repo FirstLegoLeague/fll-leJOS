@@ -17,14 +17,16 @@ public class LargeMotor extends RobotMotor {
 	}
 
 	@Override
-	public void forward(double speed) {
+	public void forward(double speed, double acceleration) {
+		l.setAcceleration(convertAcceleration(acceleration));
 		l.setSpeed(convertSpeed(speed));
 		if(!this.inverted) l.forward();
 		else l.backward();
 	}
 
 	@Override
-	public void backward(double speed) {
+	public void backward(double speed, double acceleration) {
+		l.setAcceleration(convertAcceleration(acceleration));
 		l.setSpeed(convertSpeed(speed));
 		if(!this.inverted) l.backward();
 		else l.forward();
@@ -38,6 +40,11 @@ public class LargeMotor extends RobotMotor {
 	@Override
 	public void coast() {
 		l.flt();
+	}
+	
+	@Override
+	public void setStallThreshold(int error, int time) {
+		l.setStallThreshold(error, time);
 	}
 
 	@Override

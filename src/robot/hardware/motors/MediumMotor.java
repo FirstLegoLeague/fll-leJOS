@@ -16,14 +16,16 @@ public class MediumMotor extends RobotMotor {
 	}
 
 	@Override
-	public void forward(double speed) {
+	public void forward(double speed, double acceleration) {
+		m.setAcceleration(convertAcceleration(acceleration));
 		m.setSpeed(convertSpeed(speed));
 		if(!this.inverted) m.forward();
 		else m.backward();
 	}
 
 	@Override
-	public void backward(double speed) {
+	public void backward(double speed, double acceleration) {
+		m.setAcceleration(convertAcceleration(acceleration));
 		m.setSpeed(convertSpeed(speed));
 		if(!this.inverted) m.backward();
 		else m.forward();
@@ -37,6 +39,11 @@ public class MediumMotor extends RobotMotor {
 	@Override
 	public void coast() {
 		m.flt();
+	}
+	
+	@Override
+	public void setStallThreshold(int error, int time) {
+		m.setStallThreshold(error, time);
 	}
 
 	@Override
