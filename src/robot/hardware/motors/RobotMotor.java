@@ -169,6 +169,10 @@ public abstract class RobotMotor {
 	
 	public abstract void setStallThreshold(int error, int time);
 	
+	public abstract void setSpeed(double speed);
+	
+	public abstract void setAcceleration(double acceleration);
+	
 	public abstract boolean shouldBeMoving();
 	
 	public abstract void coast();

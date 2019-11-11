@@ -72,6 +72,16 @@ public class LargeMotor extends RobotMotor {
 	public boolean shouldBeMoving() {
 		return l.isMoving();
 	}
+	
+	@Override
+	public void setSpeed(double speed) {
+		l.setSpeed(convertSpeed(speed));
+	}
+	
+	@Override
+	public void setAcceleration(double acceleration) {
+		l.setAcceleration(convertAcceleration(acceleration));
+	}
 
 	public void startSync() {
 		l.startSynchronization();

@@ -71,5 +71,15 @@ public class MediumMotor extends RobotMotor {
 	public boolean shouldBeMoving() {
 		return m.isMoving();
 	}
+	
+	@Override
+	public void setSpeed(double speed) {
+		m.setSpeed(convertSpeed(speed));
+	}
+	
+	@Override
+	public void setAcceleration(double acceleration) {
+		m.setAcceleration(convertAcceleration(acceleration));
+	}
 
 }
