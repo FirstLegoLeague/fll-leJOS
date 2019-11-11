@@ -80,9 +80,17 @@ public abstract class RobotMotor {
 		return (int) acceleration * 6000;
 	}
 	
+	protected double revertAcceleration(int acceleration) {
+		return (double) acceleration / 6000;
+	}
+	
 	protected int convertSpeed(double speed) {
 		if (speed > 1.0 || speed < -1.0) throw new IllegalArgumentException("Speed must be between 1 and -1!");
 		return (int) Math.min(Math.max((Math.abs(speed) * this.getMaxSpeed()), 0), this.getMaxSpeed());
+	}
+	
+	protected double revertSpeed(int speed) {
+		return (double) speed / this.getMaxSpeed();
 	}
 	
 	public void rotateToZero(double speed, boolean brake) {
@@ -172,6 +180,12 @@ public abstract class RobotMotor {
 	public abstract void setSpeed(double speed);
 	
 	public abstract void setAcceleration(double acceleration);
+	
+	public abstract double getCurrentSpeed();
+	
+	public abstract double getTargetSpeed();
+	
+	public abstract double getAcceleration();
 	
 	public abstract boolean shouldBeMoving();
 	

@@ -82,6 +82,21 @@ public class LargeMotor extends RobotMotor {
 	public void setAcceleration(double acceleration) {
 		l.setAcceleration(convertAcceleration(acceleration));
 	}
+	
+	@Override
+	public double getTargetSpeed() {
+		return this.revertSpeed(l.getSpeed());
+	}
+	
+	@Override
+	public double getCurrentSpeed() {
+		return this.revertSpeed(l.getRotationSpeed());
+	}
+	
+	@Override
+	public double getAcceleration() {
+		return this.revertAcceleration(l.getAcceleration());
+	}
 
 	public void startSync() {
 		l.startSynchronization();

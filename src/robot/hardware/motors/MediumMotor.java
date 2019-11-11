@@ -81,5 +81,20 @@ public class MediumMotor extends RobotMotor {
 	public void setAcceleration(double acceleration) {
 		m.setAcceleration(convertAcceleration(acceleration));
 	}
+	
+	@Override
+	public double getTargetSpeed() {
+		return this.revertSpeed(m.getSpeed());
+	}
+	
+	@Override
+	public double getCurrentSpeed() {
+		return this.revertSpeed(m.getRotationSpeed());
+	}
+	
+	@Override
+	public double getAcceleration() {
+		return this.revertAcceleration(m.getAcceleration());
+	}
 
 }
