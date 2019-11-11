@@ -1,7 +1,7 @@
 # FLL-leJOS
 Master/menu infrastructure for running FIRST LEGO League mission programs written in leJOS on the EV3
 
-### Version 2.1
+### Version 2.1.1
 Author: John Meshulam
 
 FLL-leJOS was created with FLL teamns in mind and aims to provide an intuitive and simple way to program FLL robots using Java.
