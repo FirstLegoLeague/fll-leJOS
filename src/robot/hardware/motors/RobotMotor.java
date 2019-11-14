@@ -140,7 +140,7 @@ public abstract class RobotMotor {
 		} else {
 			this.backward(speed, acceleration);
 			//HOTFIX
-			while(this.readEncoder() > startValue + degrees && RunHandler.isRunning());
+			while(this.readEncoder() > startValue - degrees && RunHandler.isRunning());
 //			Wait.waitFor(() -> {
 //				return this.readEncoder() < startValue - degrees;
 //			});
