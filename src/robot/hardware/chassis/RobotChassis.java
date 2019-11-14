@@ -46,12 +46,12 @@ public class RobotChassis implements Chassis{
 	@Override
 	public void forwardDrive(double speed, int degrees, boolean brake) {
 		if (degrees < 0) throw new IllegalArgumentException("Degrees must be positive!");
-		leftMotor.resetEncoder();
+		int startValue = leftMotor.readEncoder();
 		
 		syncDrive(speed, speed);
 		
 		//HOTFIX
-		while(leftMotor.readEncoder() < degrees && RunHandler.isRunning());
+		while(leftMotor.readEncoder() < startValue + degrees && RunHandler.isRunning());
 //		Wait.waitFor(() -> {
 //			return leftMotor.readEncoder() > degrees;
 //		});
@@ -63,12 +63,12 @@ public class RobotChassis implements Chassis{
 	@Override
 	public void backwardDrive(double speed, int degrees, boolean brake) {
 		if (degrees < 0) throw new IllegalArgumentException("Degrees must be positive!");
-		leftMotor.resetEncoder();
+		int startValue = leftMotor.readEncoder();
 		
 		syncDrive(-speed, -speed);
 		
 		//HOTFIX
-		while(leftMotor.readEncoder() > -degrees && RunHandler.isRunning());
+		while(leftMotor.readEncoder() > startValue - degrees && RunHandler.isRunning());
 //		Wait.waitFor(() -> {
 //			return leftMotor.readEncoder() < -degrees;
 //		});
