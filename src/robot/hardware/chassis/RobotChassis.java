@@ -2,6 +2,7 @@ package robot.hardware.chassis;
 
 import robot.RobotMap;
 import robot.hardware.motors.LargeMotor;
+import robot.runs.RunHandler;
 import robot.utils.Wait;
 
 public class RobotChassis implements Chassis{
@@ -49,9 +50,11 @@ public class RobotChassis implements Chassis{
 		
 		syncDrive(speed, speed);
 		
-		Wait.waitFor(() -> {
-			return leftMotor.readEncoder() > startValue + degrees;
-		});
+		//HOTFIX
+		while(leftMotor.readEncoder() < startValue + degrees && RunHandler.isRunning());
+//		Wait.waitFor(() -> {
+//			return leftMotor.readEncoder() > degrees;
+//		});
 		
 		if (brake) this.brake();
 		else this.coast();
@@ -64,9 +67,11 @@ public class RobotChassis implements Chassis{
 		
 		syncDrive(-speed, -speed);
 		
-		Wait.waitFor(() -> {
-			return leftMotor.readEncoder() < startValue - degrees;
-		});
+		//HOTFIX
+		while(leftMotor.readEncoder() > startValue - degrees && RunHandler.isRunning());
+//		Wait.waitFor(() -> {
+//			return leftMotor.readEncoder() < -degrees;
+//		});
 		
 		if (brake) this.brake();
 		else this.coast();
@@ -105,10 +110,14 @@ public class RobotChassis implements Chassis{
 		
 		syncDrive(leftSpeed, rightSpeed);
 		
-		Wait.waitFor(() -> {
-			return (Math.abs(leftMotor.readEncoder()) > Math.abs(leftStartValue) + degrees 
-					|| Math.abs(rightMotor.readEncoder()) > Math.abs(rightStartValue) + degrees);
-		});
+		//HOTFIX
+		while(Math.abs(leftMotor.readEncoder()) < Math.abs(leftStartValue) + degrees 
+				&& Math.abs(rightMotor.readEncoder()) > Math.abs(rightStartValue) + degrees 
+				&& RunHandler.isRunning());
+//		Wait.waitFor(() -> {
+//			return (Math.abs(leftMotor.readEncoder()) > degrees 
+//					|| Math.abs(rightMotor.readEncoder()) > degrees);
+//		});
 		
 		if (brake) this.brake();
 		else this.coast();

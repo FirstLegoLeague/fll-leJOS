@@ -5,7 +5,6 @@ import lejos.hardware.port.Port;
 import robot.RobotMap;
 import robot.exceptions.HardwareCreationError;
 import robot.runs.RunHandler;
-import robot.utils.Wait;
 
 public abstract class RobotMotor {
 	
@@ -102,16 +101,21 @@ public abstract class RobotMotor {
 	}
 	
 	public void rotateToValue(double speed, double acceleration, int value, boolean brake) {
+		
 		if (this.readEncoder() < value) {
 			this.forward(speed, acceleration);
-			Wait.waitFor(() -> {
-				return this.readEncoder() >= value;
-			});
+			//HOTFIX
+			while(this.readEncoder() < value && RunHandler.isRunning());
+//			Wait.waitFor(() -> {
+//				return this.readEncoder() >= value;
+//			});
 		} else {
 			this.backward(speed, acceleration);
-			Wait.waitFor(() -> {
-				return this.readEncoder() <= value;
-			});
+			//HOTFIX
+			while(this.readEncoder() > value && RunHandler.isRunning());
+//			Wait.waitFor(() -> {
+//				return this.readEncoder() <= value;
+//			});
 		}
 		
 		if (brake) this.brake();
@@ -128,14 +132,18 @@ public abstract class RobotMotor {
 
 		if (speed >= 0) {
 			this.forward(speed, acceleration);
-			Wait.waitFor(() -> {
-				return this.readEncoder() > startValue + degrees;
-			});
+			//HOTFIX
+			while(this.readEncoder() < startValue + degrees && RunHandler.isRunning());
+//			Wait.waitFor(() -> {
+//				return this.readEncoder() > startValue + degrees;
+//			});
 		} else {
 			this.backward(speed, acceleration);
-			Wait.waitFor(() -> {
-				return this.readEncoder() < startValue - degrees;
-			});
+			//HOTFIX
+			while(this.readEncoder() > startValue + degrees && RunHandler.isRunning());
+//			Wait.waitFor(() -> {
+//				return this.readEncoder() < startValue - degrees;
+//			});
 		}
 
 		if (brake) this.brake();
