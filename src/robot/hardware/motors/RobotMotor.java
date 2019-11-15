@@ -89,7 +89,7 @@ public abstract class RobotMotor {
 	}
 	
 	protected double revertSpeed(int speed) {
-		return (double) speed / this.getMaxSpeed();
+		return (double) (speed / this.getMaxSpeed());
 	}
 	
 	public void rotateToZero(double speed, boolean brake) {
