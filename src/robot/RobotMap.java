@@ -45,7 +45,7 @@ public class RobotMap {
 
 	public static void addMotor(RobotMotor motor) {
 		int index = motorportNameToIndex(motor.getPortName());
-		if (sensors[index] != null) {
+		if (motors[index] != null) {
 			throw new HardwareCreationError("Motor on port " + motor.getPortName() + " already exists!");
 		}
 		motors[index] = motor;
