@@ -37,23 +37,25 @@ public class RobotMap {
 
 	public static void addSensor(RobotSensor sensor) {
 		int index = sensor.getPortName() - 1;
-		if (sensors[index] != null) {
+		if (sensorExists(index)) {
 			throw new HardwareCreationError("Sensor on port " + sensor.getPortName() + " already exists!");
 		}
+		if(sensorNameExists(sensor.getName())) throw new HardwareCreationError("Sensor with name " + sensor.getName() + " already exists!");
 		sensors[index] = sensor;
 	}
 
 	public static void addMotor(RobotMotor motor) {
 		int index = motorportNameToIndex(motor.getPortName());
-		if (motors[index] != null) {
+		if (motorExists(index)) {
 			throw new HardwareCreationError("Motor on port " + motor.getPortName() + " already exists!");
 		}
+		if(motorNameExists(motor.getName())) throw new HardwareCreationError("Motor with name " + motor.getName() + " already exists!");
 		motors[index] = motor;
 	}
 
 	public static RobotSensor getSensor(String name) {
 		for (int i = 0; i < sensors.length; i++) {
-			if (sensors[i] != null && sensors[i].getName() == name) {
+			if (sensorExists(i) && sensors[i].getName() == name) {
 				return sensors[i];
 			}
 		}
@@ -62,7 +64,7 @@ public class RobotMap {
 
 	public static RobotMotor getMotor(String name) {
 		for (int i = 0; i < motors.length; i++) {
-			if (motors[i] != null && motors[i].getName() == name) {
+			if (motorExists(i) && motors[i].getName() == name) {
 				return motors[i];
 			}
 		}
@@ -72,7 +74,7 @@ public class RobotMap {
 
 	public static RobotSensor getSensor(int portName) {
 		int index = portName - 1;
-		if (sensors[index] != null)
+		if (sensorExists(index))
 			return sensors[index];
 
 		throw new HardwareNotFoundException("Sensor " + portName + " not found!");
@@ -80,10 +82,34 @@ public class RobotMap {
 
 	public static RobotMotor getMotor(char portName) {
 		int index = motorportNameToIndex(portName);
-		if (motors[index] != null)
+		if (motorExists(index))
 			return motors[index];
 
 		throw new HardwareNotFoundException("Motor " + portName + " not found!");
+	}
+	
+	private static boolean sensorExists(int index) {
+		if (sensors[index] != null) return true;
+		return false;
+	}
+	
+	private static boolean motorExists(int index) {
+		if (motors[index] != null) return true;
+		return false;
+	}
+	
+	private static boolean motorNameExists(String name) {
+		for (int i = 0; i < motors.length; i++) {
+			if(motors[i].getName() == name) return true;
+		}
+		return false;
+	}
+	
+	private static boolean sensorNameExists(String name) {
+		for (int i = 0; i < sensors.length; i++) {
+			if(sensors[i].getName() == name) return true;
+		}
+		return false;
 	}
 
 	private static int motorportNameToIndex(char portName) {
