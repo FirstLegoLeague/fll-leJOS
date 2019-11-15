@@ -76,11 +76,11 @@ public abstract class RobotMotor {
 	
 	protected int convertAcceleration(double acceleration) {
 		if (acceleration > 1.0 || acceleration < 0) throw new IllegalArgumentException("Acceleration must be between 0 and 1!");
-		return (int) acceleration * 6000;
+		return (int) (acceleration * 6000);
 	}
 	
 	protected double revertAcceleration(int acceleration) {
-		return (double) acceleration / 6000;
+		return (double) (acceleration / 6000);
 	}
 	
 	protected int convertSpeed(double speed) {
