@@ -6,6 +6,22 @@ import robot.hardware.sensors.RobotSensor;
 public class RobotUtils {
 	private RobotUtils() {
 	}
+	
+	public static void testHardware() {
+		RobotMotor[] motors = RobotMap.getMotors();
+		RobotSensor[] sensors = RobotMap.getSensors();
+		
+		for (int i = 0; i < motors.length; i++) {
+			if(motors[i] == null) continue;
+			motors[i].drive(0.01, 1.0);
+			motors[i].brake(true);
+		}
+		
+		for (int i = 0; i < sensors.length; i++) {
+			if(sensors[i] == null) continue;
+			sensors[i].read();
+		}
+	}
 
 	public static void calibrateAllSensors() {
 		RobotSensor[] sensors = RobotMap.getSensors();
