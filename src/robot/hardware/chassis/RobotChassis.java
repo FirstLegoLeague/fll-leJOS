@@ -3,7 +3,7 @@ package robot.hardware.chassis;
 import robot.RobotMap;
 import robot.hardware.motors.LargeMotor;
 import robot.runs.RunHandler;
-import robot.utils.Wait;
+import robot.utils.wait.Wait;
 
 public class RobotChassis implements Chassis{
 
