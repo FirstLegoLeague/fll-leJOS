@@ -27,6 +27,7 @@ public class MainClass {
 		
 		System.out.println("Ready");
 		
+		RobotUtils.floatAllMotors();
 		MainMenu.init();
 		
 		System.out.println("Over");

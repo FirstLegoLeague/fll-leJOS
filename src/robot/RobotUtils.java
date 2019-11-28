@@ -52,4 +52,13 @@ public class RobotUtils {
 			}
 		}
 	}
+	
+	public static void floatAllMotors() {
+		RobotMotor[] motors = RobotMap.getMotors();
+		for (int i = 0; i < motors.length; i++) {
+			if (motors[i] != null) {
+				motors[i].coast();
+			}
+		}
+	}
 }
