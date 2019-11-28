@@ -1,6 +1,6 @@
 package robot.utils.wait;
 
 @FunctionalInterface
-public interface WaitCondition {
+public interface Condition {
 	public boolean evaluate();
 }
