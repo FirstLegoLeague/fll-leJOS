@@ -11,19 +11,19 @@ public interface Chassis {
 	
 	public void backwardDrive(double speed);
 	
-	public void forwardDrive(double speed, int degrees, boolean brake);
+	public void forwardDriveDegrees(double speed, int degrees, boolean brake);
 	
-	public void backwardDrive(double speed, int degrees, boolean brake);
+	public void backwardDriveDegrees(double speed, int degrees, boolean brake);
 	
-	public void forwardDrive(double speed, double seconds, boolean brake);
+	public void forwardDriveSeconds(double speed, double seconds, boolean brake);
 	
-	public void backwardDrive(double speed, double seconds, boolean brake);
+	public void backwardDriveSeconds(double speed, double seconds, boolean brake);
 	
 	public void tankDrive(double leftSpeed, double rightSpeed);
 	
-	public void tankDrive(double leftSpeed, double rightSpeed, int degrees, boolean brake);
+	public void tankDriveDegrees(double leftSpeed, double rightSpeed, int degrees, boolean brake);
 	
-	public void tankDrive(double leftSpeed, double rightSpeed, double seconds, boolean brake);
+	public void tankDriveSeconds(double leftSpeed, double rightSpeed, double seconds, boolean brake);
 	
 	public void brake();
 	

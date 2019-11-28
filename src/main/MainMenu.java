@@ -3,6 +3,7 @@ package main;
 import lejos.hardware.Button;
 import lejos.hardware.lcd.LCD;
 import lejos.utility.Delay;
+import robot.RobotUtils;
 import robot.runs.RunHandler;
 
 public class MainMenu {
@@ -34,11 +35,15 @@ public class MainMenu {
 				moveDown();
 				break;
 			case Button.ID_ENTER:
-				while (Button.getButtons() == Button.ID_ENTER)
-					;
+				while (Button.getButtons() == Button.ID_ENTER);
+				
 				selectRun();
-				Delay.msDelay(50);
+				
+				while(!RunHandler.isRunning());
 				while(RunHandler.isRunning());
+				
+				Delay.msDelay(50);
+				RobotUtils.floatAllMotors();
 				break;
 			}
 			Delay.msDelay(100);

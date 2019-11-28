@@ -44,7 +44,7 @@ public class RobotChassis implements Chassis{
 	}
 
 	@Override
-	public void forwardDrive(double speed, int degrees, boolean brake) {
+	public void forwardDriveDegrees(double speed, int degrees, boolean brake) {
 		if (degrees < 0) throw new IllegalArgumentException("Degrees must be positive!");
 		int startValue = leftMotor.readEncoder();
 		
@@ -57,7 +57,7 @@ public class RobotChassis implements Chassis{
 	}
 
 	@Override
-	public void backwardDrive(double speed, int degrees, boolean brake) {
+	public void backwardDriveDegrees(double speed, int degrees, boolean brake) {
 		if (degrees < 0) throw new IllegalArgumentException("Degrees must be positive!");
 		int startValue = leftMotor.readEncoder();
 		
@@ -70,7 +70,7 @@ public class RobotChassis implements Chassis{
 	}
 
 	@Override
-	public void forwardDrive(double speed, double seconds, boolean brake) {
+	public void forwardDriveSeconds(double speed, double seconds, boolean brake) {
 		syncDrive(speed, speed);
 		
 		Wait.waitForSeconds(seconds);
@@ -80,7 +80,7 @@ public class RobotChassis implements Chassis{
 	}
 
 	@Override
-	public void backwardDrive(double speed, double seconds, boolean brake) {
+	public void backwardDriveSeconds(double speed, double seconds, boolean brake) {
 		syncDrive(-speed, -speed);
 		
 		Wait.waitForSeconds(seconds);
@@ -95,7 +95,7 @@ public class RobotChassis implements Chassis{
 	}
 
 	@Override
-	public void tankDrive(double leftSpeed, double rightSpeed, int degrees, boolean brake) {
+	public void tankDriveDegrees(double leftSpeed, double rightSpeed, int degrees, boolean brake) {
 		if (degrees < 0) throw new IllegalArgumentException("Degrees must be positive!");
 		int leftStartValue = leftMotor.readEncoder();
 		int rightStartValue = rightMotor.readEncoder();
@@ -112,7 +112,7 @@ public class RobotChassis implements Chassis{
 	}
 
 	@Override
-	public void tankDrive(double leftSpeed, double rightSpeed, double seconds, boolean brake) {
+	public void tankDriveSeconds(double leftSpeed, double rightSpeed, double seconds, boolean brake) {
 		syncDrive(leftSpeed, rightSpeed);
 		
 		Wait.waitForSeconds(seconds);
