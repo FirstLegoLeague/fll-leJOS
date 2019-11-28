@@ -1,7 +1,7 @@
 package robot.utils.loop;
 
 import robot.runs.RunHandler;
-import robot.utils.wait.Condition;
+import robot.utils.Condition;
 
 public class LoopCondition {
 	private Condition condition;

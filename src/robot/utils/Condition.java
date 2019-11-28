@@ -1,4 +1,4 @@
-package robot.utils.wait;
+package robot.utils;
 
 @FunctionalInterface
 public interface Condition {

@@ -1,4 +1,4 @@
-package robot.utils.parallel;
+package robot.utils;
 
 @FunctionalInterface
 public interface Action {
