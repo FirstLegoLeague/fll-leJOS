@@ -1,8 +1,7 @@
-package robot.utils.wait;
+package robot.utils;
 
 import lejos.utility.Delay;
 import robot.runs.RunHandler;
-import robot.utils.Condition;
 
 public class Wait {
 

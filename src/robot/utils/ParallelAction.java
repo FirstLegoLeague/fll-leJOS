@@ -1,6 +1,4 @@
-package robot.utils.parallel;
-
-import robot.utils.Action;
+package robot.utils;
 
 public class ParallelAction extends Thread{
 	
