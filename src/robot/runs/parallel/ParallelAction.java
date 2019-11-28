@@ -10,7 +10,6 @@ public class ParallelAction extends Thread{
 	
 	@Override
 	public void run() {
-		System.out.println("Running action");
 		a.execute();
 	}
 	
