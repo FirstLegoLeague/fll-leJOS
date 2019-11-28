@@ -1,4 +1,4 @@
-package robot.utils;
+package robot.utils.wait;
 
 import lejos.utility.Delay;
 import robot.runs.RunHandler;
