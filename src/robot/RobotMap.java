@@ -100,6 +100,7 @@ public class RobotMap {
 	
 	private static boolean motorNameExists(String name) {
 		for (int i = 0; i < motors.length; i++) {
+			if(motors[i] == null) continue;
 			if(motors[i].getName() == name) return true;
 		}
 		return false;
@@ -107,6 +108,7 @@ public class RobotMap {
 	
 	private static boolean sensorNameExists(String name) {
 		for (int i = 0; i < sensors.length; i++) {
+			if(sensors[i] == null) continue;
 			if(sensors[i].getName() == name) return true;
 		}
 		return false;
