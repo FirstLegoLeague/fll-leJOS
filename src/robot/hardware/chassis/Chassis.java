@@ -7,23 +7,59 @@ public interface Chassis {
 		else this.backwardDrive(-speed);
 	}
 	
-	public void forwardDrive(double speed);
+	public default void forwardDrive(double speed) {
+		this.forwardDrive(speed, 1.0);
+	}
 	
-	public void backwardDrive(double speed);
+	public default void backwardDrive(double speed) {
+		this.backwardDrive(speed, 1.0);
+	}
 	
-	public void forwardDriveDegrees(double speed, int degrees, boolean brake);
+	public void forwardDrive(double speed, double acceleration);
 	
-	public void backwardDriveDegrees(double speed, int degrees, boolean brake);
+	public void backwardDrive(double speed, double acceleration);
 	
-	public void forwardDriveSeconds(double speed, double seconds, boolean brake);
+	public default void forwardDriveDegrees(double speed, int degrees, boolean brake) {
+		this.forwardDriveDegrees(speed, 1.0, degrees, brake);
+	}
 	
-	public void backwardDriveSeconds(double speed, double seconds, boolean brake);
+	public default void backwardDriveDegrees(double speed, int degrees, boolean brake) {
+		this.backwardDriveDegrees(speed, 1.0, degrees, brake);
+	}
 	
-	public void tankDrive(double leftSpeed, double rightSpeed);
+	public void forwardDriveDegrees(double speed, double acceleration, int degrees, boolean brake);
 	
-	public void tankDriveDegrees(double leftSpeed, double rightSpeed, int degrees, boolean brake);
+	public void backwardDriveDegrees(double speed, double acceleration, int degrees, boolean brake);
 	
-	public void tankDriveSeconds(double leftSpeed, double rightSpeed, double seconds, boolean brake);
+	public default void forwardDriveSeconds(double speed, double seconds, boolean brake) {
+		this.forwardDriveSeconds(speed, 1.0, seconds, brake);
+	}
+	
+	public default void backwardDriveSeconds(double speed, double seconds, boolean brake) {
+		this.backwardDriveSeconds(speed, 1.0, seconds, brake);
+	}
+	
+	public void forwardDriveSeconds(double speed, double acceleration, double seconds, boolean brake);
+	
+	public void backwardDriveSeconds(double speed, double acceleration, double seconds, boolean brake);
+	
+	public default void tankDrive(double leftSpeed, double rightSpeed) {
+		this.tankDrive(leftSpeed, rightSpeed, 1.0);
+	}
+	
+	public void tankDrive(double leftSpeed, double rightSpeed, double acceleration);
+	
+	public default void tankDriveDegrees(double leftSpeed, double rightSpeed, int degrees, boolean brake) {
+		this.tankDriveDegrees(leftSpeed, rightSpeed, 1.0, degrees, brake);
+	}
+	
+	public void tankDriveDegrees(double leftSpeed, double rightSpeed, double acceleration, int degrees, boolean brake);
+	
+	public default void tankDriveSeconds(double leftSpeed, double rightSpeed, double seconds, boolean brake) {
+		this.tankDriveSeconds(leftSpeed, rightSpeed, 1.0, seconds, brake);
+	}
+	
+	public void tankDriveSeconds(double leftSpeed, double rightSpeed, double acceleration, double seconds, boolean brake);
 	
 	public void brake();
 	

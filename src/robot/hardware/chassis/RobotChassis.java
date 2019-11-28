@@ -34,21 +34,21 @@ public class RobotChassis implements Chassis{
 	}
 
 	@Override
-	public void forwardDrive(double speed) {
-		syncDrive(speed, speed);
+	public void forwardDrive(double speed, double acceleration) {
+		syncDrive(speed, speed, acceleration);
 	}
 
 	@Override
-	public void backwardDrive(double speed) {
-		syncDrive(-speed, -speed);
+	public void backwardDrive(double speed, double acceleration) {
+		syncDrive(-speed, -speed, acceleration);
 	}
 
 	@Override
-	public void forwardDriveDegrees(double speed, int degrees, boolean brake) {
+	public void forwardDriveDegrees(double speed, double acceleration, int degrees, boolean brake) {
 		if (degrees < 0) throw new IllegalArgumentException("Degrees must be positive!");
 		int startValue = leftMotor.readEncoder();
 		
-		syncDrive(speed, speed);
+		syncDrive(speed, speed, acceleration);
 
 		while(leftMotor.readEncoder() < startValue + degrees && RunHandler.isRunning());
 		
@@ -57,11 +57,11 @@ public class RobotChassis implements Chassis{
 	}
 
 	@Override
-	public void backwardDriveDegrees(double speed, int degrees, boolean brake) {
+	public void backwardDriveDegrees(double speed, double acceleration, int degrees, boolean brake) {
 		if (degrees < 0) throw new IllegalArgumentException("Degrees must be positive!");
 		int startValue = leftMotor.readEncoder();
 		
-		syncDrive(-speed, -speed);
+		syncDrive(-speed, -speed, acceleration);
 		
 		while(leftMotor.readEncoder() > startValue - degrees && RunHandler.isRunning());
 		
@@ -70,8 +70,8 @@ public class RobotChassis implements Chassis{
 	}
 
 	@Override
-	public void forwardDriveSeconds(double speed, double seconds, boolean brake) {
-		syncDrive(speed, speed);
+	public void forwardDriveSeconds(double speed, double acceleration, double seconds, boolean brake) {
+		syncDrive(speed, speed, acceleration);
 		
 		Wait.waitForSeconds(seconds);
 		
@@ -80,8 +80,8 @@ public class RobotChassis implements Chassis{
 	}
 
 	@Override
-	public void backwardDriveSeconds(double speed, double seconds, boolean brake) {
-		syncDrive(-speed, -speed);
+	public void backwardDriveSeconds(double speed, double acceleration, double seconds, boolean brake) {
+		syncDrive(-speed, -speed, acceleration);
 		
 		Wait.waitForSeconds(seconds);
 		
@@ -90,17 +90,17 @@ public class RobotChassis implements Chassis{
 	}
 
 	@Override
-	public void tankDrive(double leftSpeed, double rightSpeed) {
-		syncDrive(leftSpeed, rightSpeed);
+	public void tankDrive(double leftSpeed, double rightSpeed, double acceleration) {
+		syncDrive(leftSpeed, rightSpeed, acceleration);
 	}
 
 	@Override
-	public void tankDriveDegrees(double leftSpeed, double rightSpeed, int degrees, boolean brake) {
+	public void tankDriveDegrees(double leftSpeed, double rightSpeed, double acceleration, int degrees, boolean brake) {
 		if (degrees < 0) throw new IllegalArgumentException("Degrees must be positive!");
 		int leftStartValue = leftMotor.readEncoder();
 		int rightStartValue = rightMotor.readEncoder();
 		
-		syncDrive(leftSpeed, rightSpeed);
+		syncDrive(leftSpeed, rightSpeed, acceleration);
 		
 		while(Math.abs(leftMotor.readEncoder()) < Math.abs(leftStartValue) + degrees 
 				&& Math.abs(rightMotor.readEncoder()) < Math.abs(rightStartValue) + degrees 
@@ -112,8 +112,8 @@ public class RobotChassis implements Chassis{
 	}
 
 	@Override
-	public void tankDriveSeconds(double leftSpeed, double rightSpeed, double seconds, boolean brake) {
-		syncDrive(leftSpeed, rightSpeed);
+	public void tankDriveSeconds(double leftSpeed, double rightSpeed, double acceleration, double seconds, boolean brake) {
+		syncDrive(leftSpeed, rightSpeed, acceleration);
 		
 		Wait.waitForSeconds(seconds);
 		
@@ -121,21 +121,21 @@ public class RobotChassis implements Chassis{
 		else this.coast();
 	}
 	
-	private void syncDrive(double leftSpeed, double rightSpeed) {
+	private void syncDrive(double leftSpeed, double rightSpeed, double acceleration) {
 		leftMotor.startSync();
 		if(leftMotor.isInverted()) leftSpeed = -leftSpeed;
 		if(rightMotor.isInverted()) rightSpeed = -rightSpeed;
 		
 		if(leftSpeed >= 0) {
-			leftMotor.forward(leftSpeed);
+			leftMotor.forward(leftSpeed, acceleration);
 		} else {
-			leftMotor.backward(leftSpeed);
+			leftMotor.backward(leftSpeed, acceleration);
 		}
 		
 		if(rightSpeed >= 0) {
-			rightMotor.forward(rightSpeed);
+			rightMotor.forward(rightSpeed, acceleration);
 		} else {
-			rightMotor.backward(rightSpeed);
+			rightMotor.backward(rightSpeed, acceleration);
 		}
 		leftMotor.endSync();
 	}
