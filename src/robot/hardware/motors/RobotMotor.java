@@ -104,18 +104,10 @@ public abstract class RobotMotor {
 		
 		if (this.readEncoder() < value) {
 			this.forward(speed, acceleration);
-			//HOTFIX
 			while(this.readEncoder() < value && RunHandler.isRunning());
-//			Wait.waitFor(() -> {
-//				return this.readEncoder() >= value;
-//			});
 		} else {
 			this.backward(speed, acceleration);
-			//HOTFIX
 			while(this.readEncoder() > value && RunHandler.isRunning());
-//			Wait.waitFor(() -> {
-//				return this.readEncoder() <= value;
-//			});
 		}
 		
 		if (brake) this.brake();
@@ -132,18 +124,10 @@ public abstract class RobotMotor {
 
 		if (speed >= 0) {
 			this.forward(speed, acceleration);
-			//HOTFIX
 			while(this.readEncoder() < startValue + degrees && RunHandler.isRunning());
-//			Wait.waitFor(() -> {
-//				return this.readEncoder() > startValue + degrees;
-//			});
 		} else {
 			this.backward(speed, acceleration);
-			//HOTFIX
 			while(this.readEncoder() > startValue - degrees && RunHandler.isRunning());
-//			Wait.waitFor(() -> {
-//				return this.readEncoder() < startValue - degrees;
-//			});
 		}
 
 		if (brake) this.brake();
