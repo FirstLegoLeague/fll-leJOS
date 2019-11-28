@@ -39,7 +39,7 @@ public class MainMenu {
 				
 				selectRun();
 				
-				while(!RunHandler.isRunning());
+				Delay.msDelay(100);
 				while(RunHandler.isRunning());
 				
 				Delay.msDelay(50);
