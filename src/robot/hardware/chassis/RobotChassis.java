@@ -112,7 +112,7 @@ public class RobotChassis implements Chassis{
 		
 		//HOTFIX
 		while(Math.abs(leftMotor.readEncoder()) < Math.abs(leftStartValue) + degrees 
-				&& Math.abs(rightMotor.readEncoder()) > Math.abs(rightStartValue) + degrees 
+				&& Math.abs(rightMotor.readEncoder()) < Math.abs(rightStartValue) + degrees 
 				&& RunHandler.isRunning());
 //		Wait.waitFor(() -> {
 //			return (Math.abs(leftMotor.readEncoder()) > degrees 
