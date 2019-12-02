@@ -1,5 +1,6 @@
 package robot;
 
+import lejos.utility.Delay;
 import robot.hardware.motors.RobotMotor;
 import robot.hardware.sensors.RobotSensor;
 
@@ -13,7 +14,10 @@ public class RobotUtils {
 		
 		for (int i = 0; i < motors.length; i++) {
 			if(motors[i] == null) continue;
-			motors[i].drive(0.01, 1.0);
+			motors[i].drive(0.01, 0.8);
+			Delay.msDelay(50);
+			motors[i].brake(true);
+			motors[i].drive(1.0, 1.0);
 			motors[i].brake(true);
 		}
 		
