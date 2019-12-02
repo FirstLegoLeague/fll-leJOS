@@ -102,9 +102,24 @@ public class RobotChassis implements Chassis{
 		
 		syncDrive(leftSpeed, rightSpeed, acceleration);
 		
-		while(Math.abs(leftMotor.readEncoder()) < Math.abs(leftStartValue) + degrees 
-				&& Math.abs(rightMotor.readEncoder()) < Math.abs(rightStartValue) + degrees 
-				&& RunHandler.isRunning());
+		//TODO: do this better
+		if(leftSpeed >= 0 && rightSpeed >= 0) {
+			while(leftMotor.readEncoder() < leftStartValue + degrees
+					&& rightMotor.readEncoder() < rightStartValue + degrees 
+					&& RunHandler.isRunning());
+		} else if (leftSpeed < 0 && rightSpeed < 0) {
+			while(leftMotor.readEncoder() > leftStartValue - degrees
+					&& rightMotor.readEncoder() > rightStartValue - degrees 
+					&& RunHandler.isRunning());
+		} else if (leftSpeed >= 0 && rightSpeed <= 0) {
+			while(leftMotor.readEncoder() < leftStartValue + degrees
+					&& rightMotor.readEncoder() > rightStartValue - degrees 
+					&& RunHandler.isRunning());
+		} else if (leftSpeed <= 0 && rightSpeed >= 0) {
+			while(leftMotor.readEncoder() > leftStartValue - degrees
+					&& rightMotor.readEncoder() < rightStartValue + degrees 
+					&& RunHandler.isRunning());
+		}
 		
 		if (brake) this.brake();
 		else this.coast();
