@@ -156,6 +156,12 @@ public class RobotChassis implements Chassis{
 	}
 
 	@Override
+	public void setAcceleration(double acceleration) {
+		this.leftMotor.setAcceleration(acceleration);
+		this.rightMotor.setAcceleration(acceleration);
+	}
+
+	@Override
 	public void brake() {
 		leftMotor.startSync();
 		leftMotor.brake(true);

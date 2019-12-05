@@ -61,6 +61,8 @@ public interface Chassis {
 	
 	public void tankDriveSeconds(double leftSpeed, double rightSpeed, double acceleration, double seconds, boolean brake);
 	
+	public void setAcceleration(double acceleration);
+	
 	public void brake();
 	
 	public void coast();
